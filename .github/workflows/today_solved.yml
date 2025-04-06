@@ -8,10 +8,11 @@
 name: today_solved()
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+# push시, 자동 메시지 현상 방지하기 위해 비활성화
+#  push:
+#    branches: [ "main" ]
+#  pull_request:
+#    branches: [ "main" ]
   # 한국시간 기준으로 오후 10시에 봇 작동
   schedule:
     - cron: "0 13 * * *"
