@@ -1,6 +1,10 @@
 # This workflow will install Python dependencies, run tests and lint with a variety of Python versions
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
 
+# 이어드림스쿨 5기의 알고리즘 및 코딩테스트 스터디
+# today_solved() 봇
+# -- 문제풀이 인증 시간 알림을 위한 자동 메시지 출력봇
+
 name: today_solved()
 
 on:
