@@ -1,7 +1,7 @@
 # This workflow will install Python dependencies, run tests and lint with a variety of Python versions
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
 
-name: text_of_me
+name: test_of_me
 
 on:
   push:
@@ -18,7 +18,7 @@ jobs:
     - name: Discord Webhook Action
       uses: tsickert/discord-webhook@v5.3.0
       with:
-        webhook-url: ${{ secrets.DISCORD_WEBHOOK_test }}
+        webhook-url: ${{ secrets.DISCORD_WEBHOOK_TEST }}
         content: "자동 메시지봇 알림 테스트입니다."
 
   build:
