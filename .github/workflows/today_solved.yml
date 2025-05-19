@@ -15,7 +15,7 @@ on:
 #    branches: [ "main" ]
   # 수동 실행 기능 추가
   workflow_dispatch:
-  # 한국시간 기준으로 오후 10시에 봇 작동
+  # 한국시간 기준으로 오후 11시에 봇 작동
   schedule:
     - cron: "0 14 * * *"
 
