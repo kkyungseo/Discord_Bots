@@ -17,49 +17,17 @@ on:
   workflow_dispatch:
   # 한국시간 기준으로 오후 10시에 봇 작동
   schedule:
-    # 한국시간 기준 (UTC+9) → UTC로 변환
-    # 오후 10시 → 13시 UTC
-    - cron: "0 13 * * *"
-    # 낮 12시 30분 → 3시 30분 UTC
-    - cron: "30 3 * * *"
-    # 평일 오후 6시 → 9시 UTC, 월~금 (1-5)
-    - cron: "0 9 * * 1-5"
-    # 주말 오후 6시 → 9시 UTC, 토~일 (6-7)
-    - cron: "0 9 * * 6,7"
+    - cron: "0 14 * * *"
 
 jobs:
-  send-message:
+  message:
     runs-on: ubuntu-latest
     steps:
-      - name: Get current weekday (UTC)
-        id: weekday
-        run: echo "day=$(date -u +%u)" >> $GITHUB_OUTPUT
-
-      - name: Determine message
-        id: set-message
-        run: |
-          HOUR=$(date -u +%H)
-          MINUTE=$(date -u +%M)
-          DAY=${{ steps.weekday.outputs.day }}
-
-          if [ "$HOUR" = "13" ] && [ "$MINUTE" = "00" ]; then
-            echo "msg=오늘의 문제풀이를 올려주세요! 마감까지 2시간 남았습니다." >> $GITHUB_OUTPUT
-          elif [ "$HOUR" = "03" ] && [ "$MINUTE" = "30" ]; then
-            echo "msg=오늘의 문제풀이를 진행해주세요! 오늘도 화이팅입니다!" >> $GITHUB_OUTPUT
-          elif [ "$HOUR" = "09" ] && [ "$MINUTE" = "00" ]; then
-            if [ "$DAY" -ge 1 ] && [ "$DAY" -le 5 ]; then
-              echo "msg=오늘도 고생많으셨습니다! 문제풀이도 잊지 말아주세요!" >> $GITHUB_OUTPUT
-            else
-              echo "msg=주말 잘 보내고 계신가요? 문제풀이도 잊지 말아주세요!" >> $GITHUB_OUTPUT
-            fi
-          fi
-
-      - name: Send to #rating
-        if: ${{ steps.set-message.outputs.msg != '' }}
-        uses: tsickert/discord-webhook@v5.3.0
-        with:
-          webhook-url: ${{ secrets.DISCORD_WEBHOOK_01 }}
-          content: "${{ steps.set-message.outputs.msg }}"
+    - name: Discord Webhook Action
+      uses: tsickert/discord-webhook@v5.3.0
+      with:
+        webhook-url: ${{ secrets.DISCORD_WEBHOOK_01 }}
+        content: "오늘의 문제풀이를 올려주세요! 마감까지 1시간 남았습니다."
 
   build:
 
